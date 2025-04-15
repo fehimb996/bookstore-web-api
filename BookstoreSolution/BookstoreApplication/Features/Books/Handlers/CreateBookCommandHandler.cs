@@ -12,7 +12,7 @@ using BookstoreApplication.Common.Interfaces;
 
 namespace BookstoreApplication.Features.Books.Handlers
 {
-    public class CreateBookCommandHandler : IRequestHandler<CreateBookCommand, Guid>
+    public class CreateBookCommandHandler : IRequestHandler<CreateBookCommand, int>
     {
         private readonly IApplicationDbContext _context;
 
@@ -21,11 +21,10 @@ namespace BookstoreApplication.Features.Books.Handlers
             _context = context;
         }
 
-        public async Task<Guid> Handle(CreateBookCommand request, CancellationToken cancellationToken)
+        public async Task<int> Handle(CreateBookCommand request, CancellationToken cancellationToken)
         {
             var book = new Book
             {
-                Id = Guid.NewGuid(),
                 Title = request.Title,
                 Description = request.Description,
                 Language = request.Language,

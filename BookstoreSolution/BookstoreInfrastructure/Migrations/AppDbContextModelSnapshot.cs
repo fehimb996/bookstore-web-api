@@ -24,11 +24,11 @@ namespace BookstoreInfrastructure.Migrations
 
             modelBuilder.Entity("AuthorBook", b =>
                 {
-                    b.Property<Guid>("AuthorsId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int>("AuthorsId")
+                        .HasColumnType("int");
 
-                    b.Property<Guid>("BooksId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int>("BooksId")
+                        .HasColumnType("int");
 
                     b.HasKey("AuthorsId", "BooksId");
 
@@ -39,9 +39,11 @@ namespace BookstoreInfrastructure.Migrations
 
             modelBuilder.Entity("BookstoreDomain.Entities.Author", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("FirstName")
                         .IsRequired()
@@ -58,9 +60,11 @@ namespace BookstoreInfrastructure.Migrations
 
             modelBuilder.Entity("BookstoreDomain.Entities.Book", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime?>("DatePublished")
                         .HasColumnType("datetime2");
@@ -79,6 +83,7 @@ namespace BookstoreInfrastructure.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("Price")
+                        .HasPrecision(18, 2)
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("Title")

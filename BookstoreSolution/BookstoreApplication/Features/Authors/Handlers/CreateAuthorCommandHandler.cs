@@ -10,7 +10,7 @@ using BookstoreApplication.Features.Authors.Commands;
 
 namespace BookstoreApplication.Features.Authors.Handlers
 {
-    public class CreateAuthorCommandHandler : IRequestHandler<CreateAuthorCommand, Guid>
+    public class CreateAuthorCommandHandler : IRequestHandler<CreateAuthorCommand, int>
     {
         private readonly IApplicationDbContext _context;
 
@@ -19,11 +19,10 @@ namespace BookstoreApplication.Features.Authors.Handlers
             _context = context;
         }
 
-        public async Task<Guid> Handle(CreateAuthorCommand request, CancellationToken cancellationToken)
+        public async Task<int> Handle(CreateAuthorCommand request, CancellationToken cancellationToken)
         {
             var author = new Author
             {
-                Id = Guid.NewGuid(),
                 FirstName = request.FirstName,
                 LastName = request.LastName,
             };

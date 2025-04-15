@@ -13,7 +13,6 @@ namespace BookstoreInfrastructure.Data
     {
         public AppDbContext(DbContextOptions options) : base(options)
         {
-
         }
 
         public DbSet<Book> Books => Set<Book>();
@@ -27,6 +26,18 @@ namespace BookstoreInfrastructure.Data
                 .HasMany(b => b.Authors)
                 .WithMany(a => a.Books)
                 .UsingEntity(j => j.ToTable("BookAuthors"));
+
+            modelBuilder.Entity<Book>()
+                .Property(b => b.Id)
+                .ValueGeneratedOnAdd();
+
+            modelBuilder.Entity<Book>()
+                .Property(b => b.Price)
+                .HasPrecision(18, 2);
+
+            modelBuilder.Entity<Author>()
+                .Property(a => a.Id)
+                .ValueGeneratedOnAdd();
         }
     }
 }
