@@ -8,7 +8,7 @@ using BookstoreDomain.Entities;
 using BookstoreApplication.Common.Interfaces;
 using BookstoreApplication.Features.Authors.Commands;
 
-namespace BookstoreApplication.Features.Authors.Handlers
+namespace BookstoreApplication.Features.Authors.Commands.Handlers
 {
     public class CreateAuthorCommandHandler : IRequestHandler<CreateAuthorCommand, int>
     {

@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using BookstoreApplication.Common.Interfaces;
 
 
-namespace BookstoreApplication.Features.Books.Handlers
+namespace BookstoreApplication.Features.Books.Commands.Handlers
 {
     public class CreateBookCommandHandler : IRequestHandler<CreateBookCommand, int>
     {
