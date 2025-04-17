@@ -15,4 +15,8 @@
     <ProjectReference Include="..\BookstoreDomain\BookstoreDomain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Features\Authentication\Queries\" />
+  </ItemGroup>
+
 </Project>

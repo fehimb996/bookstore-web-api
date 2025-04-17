@@ -17,28 +17,28 @@ namespace BookstoreAPI.Controllers
             _mediator = mediator;
         }
 
-        [HttpPost]
+        [HttpPost("createBook")]
         public async Task<IActionResult> Create(CreateBookCommand command)
         {
             var bookId = await _mediator.Send(command);
             return Ok(new { BookId = bookId });
         }
 
-        [HttpGet]
+        [HttpGet("getAllBooks")]
         public async Task<IActionResult> GetAll()
         {
             var books = await _mediator.Send(new GetAllBooksQuery());
             return Ok(books);
         }
 
-        [HttpGet("id")]
+        [HttpGet("getBook/id")]
         public async Task<IActionResult> GetById(int id)
         {
             var book = await _mediator.Send(new GetBookByIdQuery{ Id = id});
             return Ok(book);
         }
 
-        [HttpPut("id")]
+        [HttpPut("updateBook/id")]
         public async Task<IActionResult> Update(int id, UpdateBookCommand command)
         {
             if (id != command.Id)
@@ -51,7 +51,7 @@ namespace BookstoreAPI.Controllers
             return success ? NoContent() : NotFound();
         }
 
-        [HttpDelete("id")]
+        [HttpDelete("deleteBook/id")]
         public async Task<IActionResult> Delete(int id)
         {
             var success = await _mediator.Send(new DeleteBookCommand { Id = id });

@@ -36,6 +36,7 @@ namespace BookstoreApplication.Features.Books.Queries.Handlers
                 ISBN = b.ISBN,
                 Price = b.Price,
                 DatePublished = b.DatePublished,
+                ImageUrl = b.ImageUrl,
                 Authors = b.Authors.Select(a => new AuthorDTO
                 {
                     Id = a.Id,

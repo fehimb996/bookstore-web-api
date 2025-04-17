@@ -17,21 +17,21 @@ namespace BookstoreAPI.Controllers
             _mediator = mediator;
         }
 
-        [HttpPost]
+        [HttpPost("createAuthor")]
         public async Task<IActionResult> Create(CreateAuthorCommand command)
         {
             var authorId = await _mediator.Send(command);
             return Ok(authorId);
         }
 
-        [HttpGet]
+        [HttpGet("getAllAuthors")]
         public async Task<IActionResult> GetAll()
         {
             var authors = await _mediator.Send(new GetAllAuthorsQuery());
             return Ok(authors);
         }
 
-        [HttpGet("id")]
+        [HttpGet("getAuthor/id")]
         public async Task<IActionResult> GetById(int id)
         {
             var author = await _mediator.Send(new GetAuthorByIdQuery(id));
@@ -43,7 +43,7 @@ namespace BookstoreAPI.Controllers
             return Ok(author);
         }
 
-        [HttpPut("id")]
+        [HttpPut("updateAuthor/id")]
         public async Task<IActionResult> Update(int id, UpdateAuthorCommand command)
         {
             if(id != command.Id)
@@ -61,7 +61,7 @@ namespace BookstoreAPI.Controllers
             return NoContent();
         }
 
-        [HttpDelete("id")]
+        [HttpDelete("deleteAuthor/id")]
         public async Task<IActionResult> Delete(int id)
         {
             var success = await _mediator.Send(new DeleteAuthorCommand(id));
