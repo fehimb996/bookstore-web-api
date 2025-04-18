@@ -20,16 +20,33 @@ namespace BookstoreAPI.Controllers
         }
 
         [HttpPost("register")]
-        public async Task<IActionResult> Register(RegisterRequest request)
+        public async Task<IActionResult> Register([FromBody] RegisterRequest request)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
             var result = await _mediator.Send(new RegisterUserCommand { RegisterRequest = request});
             return Ok(result);
         }
 
         [HttpPost("Login")]
-        public async Task<IActionResult> Login(LoginRequest request)
+        public async Task<IActionResult> Login([FromBody] LoginRequest request)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
             var result = await _mediator.Send(new LoginUserCommand { LoginRequest = request });
+            
+
+            if (!result.IsSuccessful)
+            {
+                return BadRequest(ModelState);
+            }
+
             return Ok(result);
         }
     }

@@ -30,6 +30,18 @@ namespace BookstoreInfrastructure.Services
 
         public async Task<AuthResponse> RegisterAsync(RegisterRequest request)
         {
+            var existingEmail = await _userManager.FindByEmailAsync(request.Email);
+
+            if (existingEmail != null)
+            {
+                return new AuthResponse
+                {
+                    IsSuccessful = false,
+                    Errors = new List<string> { "Email already exists" }
+                };
+            }
+
+
             var user = new ApplicationUser
             {
                 UserName = request.UserName,
@@ -64,12 +76,21 @@ namespace BookstoreInfrastructure.Services
         {
             var user = await _userManager.FindByEmailAsync(request.Email);
 
+            if(user == null)
+            {
+                return new AuthResponse
+                {
+                    IsSuccessful = false,
+                    Errors = new List<string> { "Email does not exist" }
+                };
+            }
+
             if(user == null || !await _userManager.CheckPasswordAsync(user, request.Password))
             {
                 return new AuthResponse
                 {
                     IsSuccessful = false,
-                    Errors = new List<string> { "Invalid credentials" }
+                    Errors = new List<string> { "Incorrect password" }
                 };
             }
 
