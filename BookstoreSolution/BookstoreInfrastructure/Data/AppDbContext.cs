@@ -13,7 +13,7 @@ namespace BookstoreInfrastructure.Data
 {
     public class AppDbContext : IdentityDbContext<ApplicationUser>, IApplicationDbContext
     {
-        public AppDbContext(DbContextOptions options) : base(options)
+        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
         }
 
