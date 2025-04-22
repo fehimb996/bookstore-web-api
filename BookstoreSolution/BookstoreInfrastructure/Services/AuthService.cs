@@ -48,7 +48,7 @@ namespace BookstoreInfrastructure.Services
                 Email = request.Email,
                 FirstName = request.FirstName,
                 LastName = request.LastName,
-                Address = request.LastName,
+                Address = request.Address,
                 City = request.City,
                 ZipCode = request.ZipCode,
                 AccountCreationDate = DateTime.Now

@@ -1,5 +1,4 @@
-﻿using BookstoreApplication.Features.Authors.DTOs;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BookstoreApplication.Features.Books.DTOs
 {
-    public class BookDTO
+    public class BookBasicDTO
     {
         public int Id { get; set; }
         public string Title { get; set; } = string.Empty;
@@ -17,6 +16,5 @@ namespace BookstoreApplication.Features.Books.DTOs
         public decimal Price { get; set; }
         public DateTime? DatePublished { get; set; }
         public string? ImageUrl { get; set; }
-        public List<AuthorBasicDTO> Authors { get; set; } = new();
     }
 }

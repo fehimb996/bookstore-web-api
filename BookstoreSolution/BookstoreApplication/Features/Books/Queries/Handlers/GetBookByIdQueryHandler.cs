@@ -10,6 +10,7 @@ using BookstoreDomain.Entities;
 using Microsoft.EntityFrameworkCore;
 using BookstoreApplication.Features.Books.DTOs;
 using BookstoreApplication.Features.Authors.DTOs;
+using BookstoreApplication.Common.Exceptions;
 
 namespace BookstoreApplication.Features.Books.Queries.Handlers
 {
@@ -28,7 +29,10 @@ namespace BookstoreApplication.Features.Books.Queries.Handlers
                 .Include(b => b.Authors)
                 .FirstOrDefaultAsync(b => b.Id == request.Id, cancellationToken);
 
-            if (book == null) return null;
+            if (book == null)
+            {
+                throw new NotFoundException(nameof(book), request.Id);
+            }
 
             return new BookDTO
             {
@@ -39,7 +43,7 @@ namespace BookstoreApplication.Features.Books.Queries.Handlers
                 ISBN = book.ISBN,
                 DatePublished = book.DatePublished,
                 Price = book.Price,
-                Authors = book.Authors.Select(a => new AuthorDTO
+                Authors = book.Authors.Select(a => new AuthorBasicDTO
                 {
                     Id = a.Id,
                     FirstName = a.FirstName,

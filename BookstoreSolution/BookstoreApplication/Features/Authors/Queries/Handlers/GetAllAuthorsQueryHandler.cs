@@ -31,10 +31,16 @@ namespace BookstoreApplication.Features.Authors.Queries.Handlers
                     Id = a.Id,
                     FirstName = a.FirstName,
                     LastName = a.LastName,
-                    Books = a.Books.Select(b => new BookDTO
+                    Books = a.Books.Select(b => new BookBasicDTO
                     {
                         Id = b.Id,
                         Title = b.Title,
+                        Description = b.Description,
+                        Language = b.Language,
+                        ISBN = b.ISBN,
+                        Price = b.Price,
+                        DatePublished = b.DatePublished,
+                        ImageUrl = b.ImageUrl
                     }).ToList()
                 }).ToListAsync(cancellationToken);
         }
