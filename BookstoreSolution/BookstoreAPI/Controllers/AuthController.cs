@@ -44,7 +44,7 @@ namespace BookstoreAPI.Controllers
 
             if (!result.IsSuccessful)
             {
-                return BadRequest(ModelState);
+                return BadRequest(new { error = result.Errors });
             }
 
             return Ok(result);
