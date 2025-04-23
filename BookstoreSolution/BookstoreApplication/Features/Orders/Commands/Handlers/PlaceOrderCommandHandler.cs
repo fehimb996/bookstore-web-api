@@ -21,6 +21,23 @@ namespace BookstoreApplication.Features.Orders.Commands.Handlers
 
         public async Task<int> Handle(PlaceOrderCommand request, CancellationToken cancellationToken)
         {
+            decimal totalPrice = 0;
+            var orderDetails = new List<OrderDetail>();
+
+            foreach(var bookId in request.BookIds)
+            {
+                var book = await _context.Books.FindAsync(bookId);
+                if(book != null)
+                {
+                    totalPrice += book.Price;
+                    orderDetails.Add(new OrderDetail
+                    {
+                        BookId = bookId,
+                        Quantity = 1
+                    });
+                }
+            }
+
             var order = new Order
             {
                 CustomerId = request.CustomerId,

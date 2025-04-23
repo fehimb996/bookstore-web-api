@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using System.IdentityModel.Tokens.Jwt;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace BookstoreAPI.Controllers
 {
@@ -14,18 +16,34 @@ namespace BookstoreAPI.Controllers
     {
         private readonly IHttpContextAccessor _ContextAccessor;
         private readonly IMediator _mediator;
+        private readonly ILogger<OrdersController> _logger; 
 
-        public OrdersController(IHttpContextAccessor contextAccessor, IMediator mediator)
+        public OrdersController(IHttpContextAccessor contextAccessor, IMediator mediator, ILogger<OrdersController> logger)
         {
             _ContextAccessor = contextAccessor;
             _mediator = mediator;
+            _logger = logger;
         }
 
         [HttpPost("purchase")]
-        [Authorize]  
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public async Task<IActionResult> Purchase([FromBody] PurchaseRequestDTO request)
         {
-            var userId = _ContextAccessor.HttpContext?.User?.FindFirstValue(ClaimTypes.NameIdentifier);
+            var userId = _ContextAccessor.HttpContext?.User?.FindFirst(JwtRegisteredClaimNames.Sub)?.Value ??
+                _ContextAccessor.HttpContext?.User?.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+            var claims = _ContextAccessor.HttpContext?.User?.Claims;
+
+            if(claims != null)
+            {
+                foreach(var claim in claims)
+                {
+                    _logger.LogInformation($"Claim type: {claim.Type}, Claim value: {claim.Value}");
+                }
+            }
+
+            _logger.LogInformation("Purchase endpoint reached!");
+
 
             if (userId == null)
             {
