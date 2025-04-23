@@ -33,7 +33,8 @@ namespace BookstoreApplication.Features.Orders.Commands.Handlers
                     orderDetails.Add(new OrderDetail
                     {
                         BookId = bookId,
-                        Quantity = 1
+                        Quantity = 1,
+                        UnitPrice = book.Price
                     });
                 }
             }
@@ -45,11 +46,8 @@ namespace BookstoreApplication.Features.Orders.Commands.Handlers
                 PaymentMethodId = request.PaymentMethodId,
                 OrderStatusId = 1,
                 OrderDate = DateTime.UtcNow,
-                OrderDetails = request.BookIds.Select(bookId => new OrderDetail
-                {
-                    BookId = bookId,
-                    Quantity = 1
-                }).ToList()
+                TotalPrice = totalPrice,
+                OrderDetails = orderDetails
             };
 
             _context.Orders.Add(order);
