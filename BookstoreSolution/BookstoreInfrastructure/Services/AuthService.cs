@@ -74,6 +74,15 @@ namespace BookstoreInfrastructure.Services
 
         public async Task<AuthResponse> LoginAsync(LoginRequest request)
         {
+            if(string.IsNullOrWhiteSpace(request.Email) || !request.Email.Contains("@"))
+            {
+                return new AuthResponse
+                {
+                    IsSuccessful = false,
+                    Errors = new List<string> { "Invalid email format" }
+                };
+            }
+
             var user = await _userManager.FindByEmailAsync(request.Email);
 
             if(user == null)
