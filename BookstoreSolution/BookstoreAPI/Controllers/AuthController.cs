@@ -28,7 +28,13 @@ namespace BookstoreAPI.Controllers
             }
 
             var result = await _mediator.Send(new RegisterUserCommand { RegisterRequest = request});
-            return Ok(result);
+
+            if (!result.IsSuccessful)
+            {
+                return BadRequest(new { error = result.Errors });
+            }
+
+            return Ok(new {message = result.Message});
         }
 
         [HttpPost("Login")]
