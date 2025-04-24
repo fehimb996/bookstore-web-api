@@ -14,7 +14,7 @@ namespace BookstoreApplication.Features.Books.Commands
         public string? Description { get; set; }
         public string? Language {  get; set; }
         public string ISBN { get; set; }
-        public DateTime? DatePublished { get; set; }
+        public DateOnly? DatePublished { get; set; }
 
         [Range(0, double.MaxValue)]
         public decimal Price { get; set; }

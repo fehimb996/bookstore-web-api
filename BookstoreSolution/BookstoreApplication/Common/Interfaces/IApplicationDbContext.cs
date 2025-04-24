@@ -14,7 +14,7 @@ namespace BookstoreApplication.Common.Interfaces
         DbSet<Book> Books { get; }
         DbSet<Author> Authors { get; }
         DbSet<Order> Orders { get; }
-        DbSet<OrderDetail> OrderDetails { get; }
+        DbSet<OrderLineItem> OrderLineItems { get; }
         DbSet<OrderStatus> OrderStatuses { get; }
         DbSet<PaymentMethod> PaymentMethods { get; }
         DbSet<ShippingMethod> ShippingMethods { get; }

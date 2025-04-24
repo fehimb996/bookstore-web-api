@@ -54,6 +54,7 @@ namespace BookstoreAPI.Controllers
             {
                 CustomerId = userId,
                 BookIds = request.BookIds,
+                Quantity = request.Quantity,
                 ShippingMethodId = request.ShippingMethodId,
                 PaymentMethodId = request.PaymentMethodId
             };

@@ -11,6 +11,7 @@ namespace BookstoreApplication.Features.Orders.Commands
     {
         public string CustomerId { get; set; }
         public List<int> BookIds { get; set; }
+        public int Quantity { get; set; }
         public int ShippingMethodId {  get; set; }
         public int PaymentMethodId { get; set; }
     }

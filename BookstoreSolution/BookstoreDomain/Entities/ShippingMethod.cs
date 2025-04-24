@@ -10,6 +10,7 @@ namespace BookstoreDomain.Entities
     {
         public int ShippingMethodId { get; set; }
         public string MethodName { get; set; }
+        public bool IsPickup { get; set; }
 
         public ICollection<Order> Orders { get; set; }
     }

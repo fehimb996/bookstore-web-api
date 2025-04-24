@@ -21,9 +21,16 @@ namespace BookstoreDomain.Entities
         public int PaymentMethodId { get; set; }
         public PaymentMethod PaymentMethod { get; set; }
 
-        public decimal TotalPrice { get; set; }
-        public DateTime OrderDate { get; set; }
+        public int? ShippingAddressId { get; set; }
+        public ShippingAddress? ShippingAddress { get; set; }
 
-        public ICollection<OrderDetail> OrderDetails { get; set; }
+        public decimal SubTotal { get; set; }
+        public decimal TaxAmount { get; set; }
+        public decimal? ShippingFee { get; set; }
+        public decimal Total { get; set; }
+        public DateTime OrderDate { get; set; } = DateTime.Now;
+        public string? FailureReason { get; set; }
+
+        public ICollection<OrderLineItem> OrderLineItems { get; set; }
     }
 }

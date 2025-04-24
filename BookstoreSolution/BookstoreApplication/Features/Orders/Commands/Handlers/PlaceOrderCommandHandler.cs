@@ -22,7 +22,7 @@ namespace BookstoreApplication.Features.Orders.Commands.Handlers
         public async Task<int> Handle(PlaceOrderCommand request, CancellationToken cancellationToken)
         {
             decimal totalPrice = 0;
-            var orderDetails = new List<OrderDetail>();
+            var orderDetails = new List<OrderLineItem>();
 
             foreach(var bookId in request.BookIds)
             {
@@ -30,11 +30,11 @@ namespace BookstoreApplication.Features.Orders.Commands.Handlers
                 if(book != null)
                 {
                     totalPrice += book.Price;
-                    orderDetails.Add(new OrderDetail
+                    orderDetails.Add(new OrderLineItem
                     {
-                        BookId = bookId,
-                        Quantity = 1,
-                        UnitPrice = book.Price
+                        BookId = bookId
+                        
+                         
                     });
                 }
             }
@@ -46,8 +46,8 @@ namespace BookstoreApplication.Features.Orders.Commands.Handlers
                 PaymentMethodId = request.PaymentMethodId,
                 OrderStatusId = 1,
                 OrderDate = DateTime.UtcNow,
-                TotalPrice = totalPrice,
-                OrderDetails = orderDetails
+                Total = totalPrice,
+                OrderLineItems = orderDetails
             };
 
             _context.Orders.Add(order);

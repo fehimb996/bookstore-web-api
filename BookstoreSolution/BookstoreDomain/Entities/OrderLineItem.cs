@@ -7,7 +7,7 @@ using BookstoreDomain.Entities;
 
 namespace BookstoreDomain.Entities
 {
-    public class OrderDetail
+    public class OrderLineItem
     {
         public int OrderId { get; set; }
         public Order Order{ get; set; }
@@ -15,7 +15,8 @@ namespace BookstoreDomain.Entities
         public int BookId { get; set; }
         public Book Book { get; set; }
 
-        public decimal UnitPrice { get; set; }
+        //public decimal UnitPrice { get; set; }
         public int Quantity { get; set; }
+        public string AdditionalComments { get; set; }
     }
 }

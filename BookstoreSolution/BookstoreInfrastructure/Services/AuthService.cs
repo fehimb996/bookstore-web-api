@@ -41,16 +41,12 @@ namespace BookstoreInfrastructure.Services
                 };
             }
 
-
             var user = new ApplicationUser
             {
                 UserName = request.UserName,
                 Email = request.Email,
                 FirstName = request.FirstName,
                 LastName = request.LastName,
-                Address = request.Address,
-                City = request.City,
-                ZipCode = request.ZipCode,
                 AccountCreationDate = DateTime.Now
             };
 

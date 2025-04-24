@@ -15,7 +15,7 @@ namespace BookstoreApplication.Features.Books.DTOs
         public string Language { get; set; }
         public string ISBN { get; set; }
         public decimal Price { get; set; }
-        public DateTime? DatePublished { get; set; }
+        public DateOnly? DatePublished { get; set; }
         public string? ImageUrl { get; set; }
         public List<AuthorBasicDTO> Authors { get; set; } = new();
     }

@@ -17,15 +17,6 @@ namespace BookstoreInfrastructure.Identity
         public string LastName { get; set; }
 
         [PersonalData]
-        public string Address {  get; set; }
-
-        [PersonalData]
-        public string City { get; set; }
-
-        [PersonalData]
-        public string ZipCode { get; set; }
-
-        [PersonalData]
         [DataType(DataType.Date)]
         public DateTime AccountCreationDate { get; set; } = DateTime.Now;
     }
